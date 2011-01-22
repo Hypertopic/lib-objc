@@ -1,16 +1,21 @@
-= Hypertopic Objective C Library
+Hypertopic Objective C Library
+==============================
 
 Hypertopic Objective C Library is a framework implements Hypertopic V2
 protocol to interact with Hypertopic server which is hosted on CouchDB server.
 
-== Changes
+Changes
+=======
 
-=== 2011-01-22
-- Create project on github and import the empty project.
-- Import readme and license file.
+2011-01-22
+----------
+
+1. Create project on github and import the empty project.
+1. Import readme and license file.
 
 
-== Installation
+Installation
+============
 
 Hypertopic Objective C Library use [JSON.framework](http://github.com/stig/json-framework), follow the following 
 steps to link JSON.framework into our project.
