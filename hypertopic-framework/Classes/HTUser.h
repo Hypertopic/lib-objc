@@ -1,31 +1,30 @@
-/*
- *  HTUser.h
- *  Hypertopic
- *
- *  Created by ZHOU Chao on 11-1-25.
- *  Copyright 2011 Nostos Technologies Ltd. All rights reserved.
- *
- */
+//
+//  HTUser.h
+//  Hypertopic
+//
+//  Created by ZHOU Chao on 11-1-25.
+//  Copyright 2011 Nostos Technologies Ltd. All rights reserved.
+//
 
 #import <Cocoa/Cocoa.h>
-#import <JSON/JSON.h>
-#import <HTDatabase.h>
+
+@class HTDatabase;
 
 @interface HTUser : NSObject {
-	HTDatabase *htDatabase;
+	HTDatabase *database;
 	NSString *userId;
 }
 
 /// Initialise a database with a server and user ID.
-- (id)initWithServer:(HTDatabase*)server name:(NSString*)name;
+- (id)initWithServer:(HTDatabase*)db user:(NSString*)userId;
 
 /// Database
-@property (readonly) HTDatabase *htDatabase;
+@property (readonly) HTDatabase *database;
 /// User ID
 @property (readonly) NSString *userId;
 
 #pragma mark -
 #pragma mark GET Call
-- (NSDictionary*)get:(NSString*)args;
+- (NSDictionary*)getView;
 
 @end

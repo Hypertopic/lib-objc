@@ -7,7 +7,7 @@
 //
 
 #import "HTDatabase.h"
-#import "JSON.h"
+#import "HTUser.h"
 
 @implementation HTDatabase
 
@@ -31,5 +31,10 @@
 - (id)init
 {
     return [self initWithServerUrl:@"http://localhost:5984"];
+}
+
+- (HTUser*)getUser:(NSString*)u
+{
+    return [[[HTUser alloc] initWithServer:self user:u] autorelease];
 }
 @end

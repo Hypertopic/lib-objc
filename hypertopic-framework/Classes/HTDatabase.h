@@ -9,15 +9,17 @@
 
 #import <Foundation/Foundation.h>
 
-#define HT_LOG(o) NSLog(@"%s = %@",__FUNCTION__,o);
+@class HTUser;
 
 @interface HTDatabase : NSObject {
 @private
-	NSString* serverUrl;
+	NSString* _serverUrl;
 }
 
 - (id)initWithServerUrl: (NSString*) s;
 
 @property (readonly) NSString *serverUrl;
 
+/// Returns an user object.
+- (HTUser*)getUser:(NSString*)userId;
 @end
