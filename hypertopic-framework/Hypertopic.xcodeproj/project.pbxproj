@@ -29,6 +29,11 @@
 		E547FFC312EC0AEC0015E072 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = E547FFB012EC0AEC0015E072 /* SBJsonTokeniser.m */; };
 		E547FFC412EC0AEC0015E072 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = E547FFB112EC0AEC0015E072 /* SBJsonWriter.h */; };
 		E547FFC512EC0AEC0015E072 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = E547FFB212EC0AEC0015E072 /* SBJsonWriter.m */; };
+		E547FFDC12EC66210015E072 /* HTDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = E547FFDB12EC66210015E072 /* HTDatabase.h */; };
+		E5BE7CAE12EE8615009EA513 /* HTUser.h in Headers */ = {isa = PBXBuildFile; fileRef = E5BE7CAD12EE8615009EA513 /* HTUser.h */; };
+		E5D866F012EED36B001FD018 /* HTDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D866EE12EED36B001FD018 /* HTDatabase.m */; };
+		E5D8670512EED55A001FD018 /* TestHTDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = E5D8670312EED55A001FD018 /* TestHTDatabase.h */; };
+		E5D8670612EED55A001FD018 /* TestHTDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D8670412EED55A001FD018 /* TestHTDatabase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +66,11 @@
 		E547FFB012EC0AEC0015E072 /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
 		E547FFB112EC0AEC0015E072 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		E547FFB212EC0AEC0015E072 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		E547FFDB12EC66210015E072 /* HTDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTDatabase.h; path = Classes/HTDatabase.h; sourceTree = "<group>"; };
+		E5BE7CAD12EE8615009EA513 /* HTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTUser.h; path = Classes/HTUser.h; sourceTree = "<group>"; };
+		E5D866EE12EED36B001FD018 /* HTDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTDatabase.m; path = Classes/HTDatabase.m; sourceTree = "<group>"; };
+		E5D8670312EED55A001FD018 /* TestHTDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestHTDatabase.h; path = Test/TestHTDatabase.h; sourceTree = "<group>"; };
+		E5D8670412EED55A001FD018 /* TestHTDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestHTDatabase.m; path = Test/TestHTDatabase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +96,7 @@
 		0867D691FE84028FC02AAC07 /* Hypertopic */ = {
 			isa = PBXGroup;
 			children = (
+				E5D8670212EED51D001FD018 /* Test */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				089C1665FE841158C02AAC07 /* Resources */,
@@ -117,7 +128,9 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E5BE7C9F12EE6A69009EA513 /* headers */,
 				E547FF9E12EC0AD30015E072 /* JSON */,
+				E5D866EE12EED36B001FD018 /* HTDatabase.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -192,6 +205,24 @@
 			path = "../json-framework/Classes";
 			sourceTree = SOURCE_ROOT;
 		};
+		E5BE7C9F12EE6A69009EA513 /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				E547FFDB12EC66210015E072 /* HTDatabase.h */,
+				E5BE7CAD12EE8615009EA513 /* HTUser.h */,
+			);
+			name = headers;
+			sourceTree = "<group>";
+		};
+		E5D8670212EED51D001FD018 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				E5D8670312EED55A001FD018 /* TestHTDatabase.h */,
+				E5D8670412EED55A001FD018 /* TestHTDatabase.m */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -209,6 +240,9 @@
 				E547FFC012EC0AEC0015E072 /* SBJsonStreamWriterState.h in Headers */,
 				E547FFC212EC0AEC0015E072 /* SBJsonTokeniser.h in Headers */,
 				E547FFC412EC0AEC0015E072 /* SBJsonWriter.h in Headers */,
+				E547FFDC12EC66210015E072 /* HTDatabase.h in Headers */,
+				E5BE7CAE12EE8615009EA513 /* HTUser.h in Headers */,
+				E5D8670512EED55A001FD018 /* TestHTDatabase.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +319,8 @@
 				E547FFC112EC0AEC0015E072 /* SBJsonStreamWriterState.m in Sources */,
 				E547FFC312EC0AEC0015E072 /* SBJsonTokeniser.m in Sources */,
 				E547FFC512EC0AEC0015E072 /* SBJsonWriter.m in Sources */,
+				E5D866F012EED36B001FD018 /* HTDatabase.m in Sources */,
+				E5D8670612EED55A001FD018 /* TestHTDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
