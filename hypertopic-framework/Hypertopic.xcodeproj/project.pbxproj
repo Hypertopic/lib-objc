@@ -32,13 +32,10 @@
 		E547FFDC12EC66210015E072 /* HTDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = E547FFDB12EC66210015E072 /* HTDatabase.h */; };
 		E5BE7CAE12EE8615009EA513 /* HTUser.h in Headers */ = {isa = PBXBuildFile; fileRef = E5BE7CAD12EE8615009EA513 /* HTUser.h */; };
 		E5D866F012EED36B001FD018 /* HTDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D866EE12EED36B001FD018 /* HTDatabase.m */; };
-		E5D8670612EED55A001FD018 /* TestHTDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D8670412EED55A001FD018 /* TestHTDatabase.m */; };
 		E5D8676012EEDA67001FD018 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D8675F12EEDA67001FD018 /* SenTestingKit.framework */; };
-		E5D8678412EEDB60001FD018 /* TestHTDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D8670412EED55A001FD018 /* TestHTDatabase.m */; };
 		E5D8678912EEDB7A001FD018 /* Hypertopic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* Hypertopic.framework */; };
 		E5D867A712EEDC9F001FD018 /* HTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D867A512EEDC9F001FD018 /* HTUser.m */; };
-		E5D8682B12EF0AD2001FD018 /* TestHTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D8682912EF0AD2001FD018 /* TestHTUser.m */; };
-		E5D8687A12EF15C5001FD018 /* TestHTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D8682912EF0AD2001FD018 /* TestHTUser.m */; };
+		E5D8693912EF247B001FD018 /* TestHTUser.m in Resources */ = {isa = PBXBuildFile; fileRef = E5D8682912EF0AD2001FD018 /* TestHTUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -358,6 +355,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5D8693912EF247B001FD018 /* TestHTUser.m in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,9 +392,7 @@
 				E547FFC312EC0AEC0015E072 /* SBJsonTokeniser.m in Sources */,
 				E547FFC512EC0AEC0015E072 /* SBJsonWriter.m in Sources */,
 				E5D866F012EED36B001FD018 /* HTDatabase.m in Sources */,
-				E5D8670612EED55A001FD018 /* TestHTDatabase.m in Sources */,
 				E5D867A712EEDC9F001FD018 /* HTUser.m in Sources */,
-				E5D8682B12EF0AD2001FD018 /* TestHTUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,8 +400,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5D8687A12EF15C5001FD018 /* TestHTUser.m in Sources */,
-				E5D8678412EEDB60001FD018 /* TestHTDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
