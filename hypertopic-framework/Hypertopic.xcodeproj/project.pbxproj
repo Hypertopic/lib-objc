@@ -35,7 +35,8 @@
 		E5D8676012EEDA67001FD018 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D8675F12EEDA67001FD018 /* SenTestingKit.framework */; };
 		E5D8678912EEDB7A001FD018 /* Hypertopic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* Hypertopic.framework */; };
 		E5D867A712EEDC9F001FD018 /* HTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D867A512EEDC9F001FD018 /* HTUser.m */; };
-		E5D8693912EF247B001FD018 /* TestHTUser.m in Resources */ = {isa = PBXBuildFile; fileRef = E5D8682912EF0AD2001FD018 /* TestHTUser.m */; };
+		E5D8696112EF25F7001FD018 /* TestHTDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D8670412EED55A001FD018 /* TestHTDatabase.m */; };
+		E5D8696212EF2603001FD018 /* TestHTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D8682912EF0AD2001FD018 /* TestHTUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -355,7 +356,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5D8693912EF247B001FD018 /* TestHTUser.m in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +400,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5D8696112EF25F7001FD018 /* TestHTDatabase.m in Sources */,
+				E5D8696212EF2603001FD018 /* TestHTUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

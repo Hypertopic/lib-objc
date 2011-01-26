@@ -26,5 +26,9 @@
 #pragma mark -
 #pragma mark GET Call
 - (NSDictionary*)getView;
+- (NSDictionary*)listCorpora;
+- (NSDictionary*)listViewpoints;
+
+#pragma mark POST and PUT Call
 
 @end

@@ -48,12 +48,25 @@
 	DLog(@" URL Status Code %i", [response statusCode]);
     if (200 == [response statusCode]) {
         NSString *json = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-        return [json JSONValue];
+        NSDictionary *doc =	[json JSONValue];
+		return [[database normalize:doc] objectForKey:userId];
     }else{
         DLog(@"HTTP GET FAILED:  %@",  urlString );
         DLog(@"STATUS CODE %i",  [response statusCode]);
     }
     
     return nil;
+}
+
+- (NSDictionary*)listCorpora
+{
+	NSDictionary *doc = [self getView];
+	return [doc objectForKey:@"corpus"];
+}
+
+- (NSDictionary*)listViewpoints
+{
+	NSDictionary *doc = [self getView];
+	return [doc objectForKey:@"viewpoint"];
 }
 @end

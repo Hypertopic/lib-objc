@@ -22,4 +22,6 @@
 
 /// Returns an user object.
 - (HTUser*)getUser:(NSString*)userId;
+/// Parse returned view
+- (NSDictionary*)normalize:(NSDictionary*) doc;
 @end

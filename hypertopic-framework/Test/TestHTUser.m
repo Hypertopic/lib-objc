@@ -30,14 +30,23 @@
     [database release];
 }
 
-- (void) testDefaultServerUrl
-{
-	STAssertEqualObjects(database.serverUrl, @"http://127.0.0.1:5984/argos/_design/argos/_rewrite", nil);
-}
-
 - (void) testGetView
 {
 	NSDictionary *doc = [user getView];
-	STAssertTrue([doc objectForKey:@"total_rows"] > 0, nil);
+	STAssertNotNil(doc, nil);
+	STAssertTrue([[doc objectForKey:@"viewpoint"] count]> 0, nil);
+}
+
+- (void) testListViewpoints
+{
+	NSDictionary *viewpoints = [user listViewpoints];
+	STAssertNotNil(viewpoints, nil);
+	STAssertTrue([viewpoints count]> 0, nil);
+}
+
+- (void) testListCorpora
+{
+	NSDictionary *corpora = [user listCorpora];
+	STAssertNil(corpora, nil);
 }
 @end

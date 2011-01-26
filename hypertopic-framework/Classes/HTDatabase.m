@@ -37,4 +37,34 @@
 {
     return [[[HTUser alloc] initWithServer:self user:u] autorelease];
 }
+
+- (NSDictionary*)normalize:(NSDictionary *)doc
+{
+	NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+	NSArray *rows = [doc objectForKey:@"rows"];
+	for(NSDictionary *row in rows)
+	{
+		NSArray *keys = [row objectForKey:@"key"];
+		NSMutableDictionary *current = result;
+		for(NSString *key in keys)
+		{
+			if([current objectForKey:key] == nil)
+				[current setObject:[[NSMutableDictionary alloc] init] forKey: key];			
+			current = [current objectForKey:key];
+		}
+		NSDictionary *value = [row objectForKey:@"value"];
+		for(NSString *attribute in value)
+		{
+			NSArray *v = [current objectForKey:attribute];
+			if(v == nil)
+				v = [NSArray arrayWithObject:[value objectForKey:attribute]];
+			else
+				[v arrayByAddingObject: [value objectForKey:attribute]];
+
+			[current setObject:v forKey:attribute];
+		}
+	}
+	/// DLog(@"result : %@", [result JSONRepresentation]);
+	return result;
+}
 @end
