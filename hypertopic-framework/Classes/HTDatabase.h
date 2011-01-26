@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 
 @class HTUser;
+@class HTCorpus;
 
 @interface HTDatabase : NSObject {
 @private
@@ -21,7 +22,17 @@
 @property (readonly) NSString *serverUrl;
 
 /// Returns an user object.
-- (HTUser*)getUser:(NSString*)userId;
+- (HTUser*)getUser:(NSString*) userID;
+/// Returns a corpus.
+- (HTCorpus*)getCorpus:(NSString*) corpusID;
+
 /// Parse returned view
 - (NSDictionary*)normalize:(NSDictionary*) doc;
+- (NSDictionary*)httpGet:(NSString*)urlString;
+
+- (BOOL)httpDelete:(NSDictionary*)doc;
+
+- (BOOL)httpPut:(NSDictionary*)doc;
+
+- (NSDictionary *)httpPost:(NSDictionary*)doc;
 @end

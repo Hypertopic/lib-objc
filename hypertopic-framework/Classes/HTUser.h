@@ -7,28 +7,21 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "HTIdentified.h"
 
 @class HTDatabase;
 
-@interface HTUser : NSObject {
-	HTDatabase *database;
-	NSString *userId;
+@interface HTUser : HTIdentified {
+
 }
 
-/// Initialise a database with a server and user ID.
-- (id)initWithServer:(HTDatabase*)db user:(NSString*)userId;
-
-/// Database
-@property (readonly) HTDatabase *database;
-/// User ID
-@property (readonly) NSString *userId;
-
 #pragma mark -
-#pragma mark GET Call
-- (NSDictionary*)getView;
+#pragma mark List corpora and viewpoints
 - (NSDictionary*)listCorpora;
 - (NSDictionary*)listViewpoints;
 
-#pragma mark POST and PUT Call
+#pragma mark -
+#pragma mark Create corpus and viewpoint
+- (BOOL)createViewpoint: (NSString *)name;
 
 @end

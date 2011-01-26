@@ -9,6 +9,8 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "HTDatabase.h"
 #import "HTUser.h"
+#import "JSON.h"
+
 
 @interface User : SenTestCase
 {
@@ -48,5 +50,16 @@
 {
 	NSDictionary *corpora = [user listCorpora];
 	STAssertNil(corpora, nil);
+}
+
+-(void) testGetViewUrl
+{
+	NSString *url = [user getViewUrl];
+	STAssertTrue([url isEqual:@"http://127.0.0.1:5984/argos/_design/argos/_rewrite/user/chao.zhou"], nil);
+}
+
+-(void) testCreateViewpoint
+{
+	STAssertTrue([user createViewpoint:@"test-viewpoint"], nil);
 }
 @end

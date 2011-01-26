@@ -31,11 +31,23 @@
 		E547FFC512EC0AEC0015E072 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = E547FFB212EC0AEC0015E072 /* SBJsonWriter.m */; };
 		E547FFDC12EC66210015E072 /* HTDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = E547FFDB12EC66210015E072 /* HTDatabase.h */; };
 		E5BE7CAE12EE8615009EA513 /* HTUser.h in Headers */ = {isa = PBXBuildFile; fileRef = E5BE7CAD12EE8615009EA513 /* HTUser.h */; };
+		E5C2C61B12F00C2A001275C9 /* HTViewpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C61A12F00C2A001275C9 /* HTViewpoint.h */; };
+		E5C2C61D12F00C36001275C9 /* HTCorpus.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C61C12F00C36001275C9 /* HTCorpus.h */; };
+		E5C2C61F12F00C42001275C9 /* HTTopic.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C61E12F00C42001275C9 /* HTTopic.h */; };
+		E5C2C62112F00C4A001275C9 /* HTCorpus.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C62012F00C4A001275C9 /* HTCorpus.h */; };
+		E5C2C66212F00F1B001275C9 /* HTCorpus.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C66012F00F1B001275C9 /* HTCorpus.m */; };
+		E5C2C66712F01161001275C9 /* HTIdentified.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C66512F01161001275C9 /* HTIdentified.h */; };
+		E5C2C66812F01161001275C9 /* HTIdentified.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C66612F01161001275C9 /* HTIdentified.m */; };
+		E5C2C66B12F01263001275C9 /* HTNamed.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C66912F01263001275C9 /* HTNamed.h */; };
+		E5C2C66C12F01263001275C9 /* HTNamed.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C66A12F01263001275C9 /* HTNamed.m */; };
+		E5C2C67F12F01338001275C9 /* HTLocated.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C67D12F01338001275C9 /* HTLocated.h */; };
+		E5C2C68012F01338001275C9 /* HTLocated.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C67E12F01338001275C9 /* HTLocated.m */; };
+		E5C2C68A12F0140A001275C9 /* HTRegistered.h in Headers */ = {isa = PBXBuildFile; fileRef = E5C2C68812F0140A001275C9 /* HTRegistered.h */; };
+		E5C2C68B12F0140A001275C9 /* HTRegistered.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C2C68912F0140A001275C9 /* HTRegistered.m */; };
 		E5D866F012EED36B001FD018 /* HTDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D866EE12EED36B001FD018 /* HTDatabase.m */; };
 		E5D8676012EEDA67001FD018 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D8675F12EEDA67001FD018 /* SenTestingKit.framework */; };
 		E5D8678912EEDB7A001FD018 /* Hypertopic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* Hypertopic.framework */; };
 		E5D867A712EEDC9F001FD018 /* HTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D867A512EEDC9F001FD018 /* HTUser.m */; };
-		E5D8696112EF25F7001FD018 /* TestHTDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D8670412EED55A001FD018 /* TestHTDatabase.m */; };
 		E5D8696212EF2603001FD018 /* TestHTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D8682912EF0AD2001FD018 /* TestHTUser.m */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +93,19 @@
 		E547FFB212EC0AEC0015E072 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		E547FFDB12EC66210015E072 /* HTDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTDatabase.h; path = Classes/HTDatabase.h; sourceTree = "<group>"; };
 		E5BE7CAD12EE8615009EA513 /* HTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTUser.h; path = Classes/HTUser.h; sourceTree = "<group>"; };
+		E5C2C61A12F00C2A001275C9 /* HTViewpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTViewpoint.h; path = Classes/HTViewpoint.h; sourceTree = "<group>"; };
+		E5C2C61C12F00C36001275C9 /* HTCorpus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTCorpus.h; path = Classes/HTCorpus.h; sourceTree = "<group>"; };
+		E5C2C61E12F00C42001275C9 /* HTTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTopic.h; path = Classes/HTTopic.h; sourceTree = "<group>"; };
+		E5C2C62012F00C4A001275C9 /* HTCorpus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTCorpus.h; path = Classes/HTCorpus.h; sourceTree = "<group>"; };
+		E5C2C66012F00F1B001275C9 /* HTCorpus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTCorpus.m; path = Classes/HTCorpus.m; sourceTree = "<group>"; };
+		E5C2C66512F01161001275C9 /* HTIdentified.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTIdentified.h; path = Classes/HTIdentified.h; sourceTree = "<group>"; };
+		E5C2C66612F01161001275C9 /* HTIdentified.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTIdentified.m; path = Classes/HTIdentified.m; sourceTree = "<group>"; };
+		E5C2C66912F01263001275C9 /* HTNamed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTNamed.h; path = Classes/HTNamed.h; sourceTree = "<group>"; };
+		E5C2C66A12F01263001275C9 /* HTNamed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTNamed.m; path = Classes/HTNamed.m; sourceTree = "<group>"; };
+		E5C2C67D12F01338001275C9 /* HTLocated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTLocated.h; path = Classes/HTLocated.h; sourceTree = "<group>"; };
+		E5C2C67E12F01338001275C9 /* HTLocated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTLocated.m; path = Classes/HTLocated.m; sourceTree = "<group>"; };
+		E5C2C68812F0140A001275C9 /* HTRegistered.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTRegistered.h; path = Classes/HTRegistered.h; sourceTree = "<group>"; };
+		E5C2C68912F0140A001275C9 /* HTRegistered.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTRegistered.m; path = Classes/HTRegistered.m; sourceTree = "<group>"; };
 		E5D866EE12EED36B001FD018 /* HTDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTDatabase.m; path = Classes/HTDatabase.m; sourceTree = "<group>"; };
 		E5D8670412EED55A001FD018 /* TestHTDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestHTDatabase.m; path = Test/TestHTDatabase.m; sourceTree = "<group>"; };
 		E5D8675912EEDA23001FD018 /* Test.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,7 +184,12 @@
 				E5BE7C9F12EE6A69009EA513 /* headers */,
 				E547FF9E12EC0AD30015E072 /* JSON */,
 				E5D866EE12EED36B001FD018 /* HTDatabase.m */,
+				E5C2C66612F01161001275C9 /* HTIdentified.m */,
+				E5C2C66A12F01263001275C9 /* HTNamed.m */,
+				E5C2C67E12F01338001275C9 /* HTLocated.m */,
+				E5C2C68912F0140A001275C9 /* HTRegistered.m */,
 				E5D867A512EEDC9F001FD018 /* HTUser.m */,
+				E5C2C66012F00F1B001275C9 /* HTCorpus.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -239,7 +269,15 @@
 			isa = PBXGroup;
 			children = (
 				E547FFDB12EC66210015E072 /* HTDatabase.h */,
+				E5C2C66512F01161001275C9 /* HTIdentified.h */,
+				E5C2C66912F01263001275C9 /* HTNamed.h */,
+				E5C2C67D12F01338001275C9 /* HTLocated.h */,
+				E5C2C68812F0140A001275C9 /* HTRegistered.h */,
 				E5BE7CAD12EE8615009EA513 /* HTUser.h */,
+				E5C2C61A12F00C2A001275C9 /* HTViewpoint.h */,
+				E5C2C61C12F00C36001275C9 /* HTCorpus.h */,
+				E5C2C61E12F00C42001275C9 /* HTTopic.h */,
+				E5C2C62012F00C4A001275C9 /* HTCorpus.h */,
 			);
 			name = headers;
 			sourceTree = "<group>";
@@ -272,6 +310,14 @@
 				E547FFC412EC0AEC0015E072 /* SBJsonWriter.h in Headers */,
 				E547FFDC12EC66210015E072 /* HTDatabase.h in Headers */,
 				E5BE7CAE12EE8615009EA513 /* HTUser.h in Headers */,
+				E5C2C61B12F00C2A001275C9 /* HTViewpoint.h in Headers */,
+				E5C2C61D12F00C36001275C9 /* HTCorpus.h in Headers */,
+				E5C2C61F12F00C42001275C9 /* HTTopic.h in Headers */,
+				E5C2C62112F00C4A001275C9 /* HTCorpus.h in Headers */,
+				E5C2C66712F01161001275C9 /* HTIdentified.h in Headers */,
+				E5C2C66B12F01263001275C9 /* HTNamed.h in Headers */,
+				E5C2C67F12F01338001275C9 /* HTLocated.h in Headers */,
+				E5C2C68A12F0140A001275C9 /* HTRegistered.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +439,11 @@
 				E547FFC512EC0AEC0015E072 /* SBJsonWriter.m in Sources */,
 				E5D866F012EED36B001FD018 /* HTDatabase.m in Sources */,
 				E5D867A712EEDC9F001FD018 /* HTUser.m in Sources */,
+				E5C2C66212F00F1B001275C9 /* HTCorpus.m in Sources */,
+				E5C2C66812F01161001275C9 /* HTIdentified.m in Sources */,
+				E5C2C66C12F01263001275C9 /* HTNamed.m in Sources */,
+				E5C2C68012F01338001275C9 /* HTLocated.m in Sources */,
+				E5C2C68B12F0140A001275C9 /* HTRegistered.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +451,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5D8696112EF25F7001FD018 /* TestHTDatabase.m in Sources */,
 				E5D8696212EF2603001FD018 /* TestHTUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
