@@ -23,6 +23,10 @@
 /// ID
 @property (readonly) NSString *objectID;
 
+/// Fetch view from CouchDB server, and normalize it.
+-(NSDictionary*)fetchView;
+/// Return view by object keys
 -(NSDictionary*)getView;
+
 -(NSString *)getViewUrl;
 @end

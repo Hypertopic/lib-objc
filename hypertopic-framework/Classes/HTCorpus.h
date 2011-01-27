@@ -8,26 +8,17 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "HTDatabase.h"
+#import "HTRegistered.h"
 
-@class HTDatabase;
-
-@interface HTCorpus : NSObject {
-	HTDatabase *database;
-	NSString *corpusID;
+@interface HTCorpus : HTRegistered {
 }
 
-/// Initialise a database with a server and corpus ID.
-- (id)initWithServer:(HTDatabase*)db withCorpusID:(NSString*)corpusID;
+- (NSArray *)listUsers;
 
-/// Database
-@property (readonly) HTDatabase *database;
-/// User ID
-@property (readonly) NSString *corpusID;
+- (BOOL)rename: (NSString *)name;
 
-#pragma mark -
-#pragma mark GET Call
-//- (NSDictionary*)getView;
-
-#pragma mark POST and PUT Call
+- (HTItem *) getItem: (NSString *) itemID;
+- (BOOL)createItem: (NSString *)name;
 
 @end

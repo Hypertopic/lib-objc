@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 #import "HTIdentified.h"
-
-@class HTDatabase;
+#import "HTDatabase.h"
+#import "HTCorpus.h"
 
 @interface HTUser : HTIdentified {
 
@@ -23,5 +23,6 @@
 #pragma mark -
 #pragma mark Create corpus and viewpoint
 - (BOOL)createViewpoint: (NSString *)name;
+- (HTCorpus*)createCorpus: (NSString *)name;
 
 @end

@@ -49,7 +49,7 @@
 - (void) testListCorpora
 {
 	NSDictionary *corpora = [user listCorpora];
-	STAssertNil(corpora, nil);
+	STAssertNotNil(corpora, nil);
 }
 
 -(void) testGetViewUrl
@@ -61,5 +61,10 @@
 -(void) testCreateViewpoint
 {
 	STAssertTrue([user createViewpoint:@"test-viewpoint"], nil);
+}
+
+-(void) testCreateCorpus
+{
+	STAssertTrue([user createCorpus:@"test-corpus"], nil);
 }
 @end

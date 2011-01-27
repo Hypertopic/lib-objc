@@ -36,12 +36,26 @@
 	NSDictionary *new = [[doc copy] autorelease];
 	[doc release];
 	DLog(@"viewpoint: %@", new);
-	NSDictionary *viewpoint = [self.database httpPost: new];
-	DLog(@"returned: %@", viewpoint);
-	NSString *viewpointID = [viewpoint objectForKey:@"id"];
+	NSDictionary *result = [self.database httpPost: new];
+	DLog(@"returned: %@", result);
+	NSString *resultID = [result objectForKey:@"id"];
 	//return self.database getViewpoint
-	DLog(@"new created viewpoint id: %@", viewpointID);
+	DLog(@"new created viewpoint id: %@", resultID);
 	return true;
 }
-
+- (HTCorpus *)createCorpus: (NSString *)name
+{
+	NSMutableDictionary *doc = [[NSMutableDictionary alloc] initWithCapacity:2];
+	[doc setObject:name forKey: @"corpus_name"];
+	[doc setObject:[[NSArray alloc] initWithObjects:objectID, nil] forKey:@"users"];
+	NSDictionary *new = [[doc copy] autorelease];
+	[doc release];
+	DLog(@"viewpoint: %@", new);
+	NSDictionary *result = [self.database httpPost: new];
+	DLog(@"returned: %@", result);
+	NSString *resultID = [result objectForKey:@"id"];
+	//return self.database getViewpoint
+	DLog(@"new created viewpoint id: %@", resultID);
+	return [self.database getCorpus:resultID];
+}
 @end

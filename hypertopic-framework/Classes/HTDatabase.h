@@ -11,6 +11,7 @@
 
 @class HTUser;
 @class HTCorpus;
+@class HTItem;
 
 @interface HTDatabase : NSObject {
 @private
@@ -21,10 +22,12 @@
 
 @property (readonly) NSString *serverUrl;
 
-/// Returns an user object.
++ (NSString *)GetUUID;
+
+/// Returns an hypertopic object.
 - (HTUser*)getUser:(NSString*) userID;
-/// Returns a corpus.
 - (HTCorpus*)getCorpus:(NSString*) corpusID;
+- (HTItem*)getItem: (NSString *)itemID withCorpusID:(NSString *) corpusID;
 
 /// Parse returned view
 - (NSDictionary*)normalize:(NSDictionary*) doc;

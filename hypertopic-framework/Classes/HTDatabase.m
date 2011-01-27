@@ -9,6 +9,7 @@
 #import "HTDatabase.h"
 #import "HTUser.h"
 #import "HTCorpus.h"
+#import "HTItem.h"
 #import "JSON.h"
 
 @implementation HTDatabase
@@ -35,6 +36,14 @@
     return [self initWithServerUrl:@"http://localhost:5984/argos/_design/argos/_rewrite"];
 }
 
++ (NSString *)GetUUID
+{
+	CFUUIDRef theUUID = CFUUIDCreate(NULL);
+	CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+	CFRelease(theUUID);
+	return [(NSString *)string autorelease];
+}
+
 #pragma mark -
 #pragma mark Get Hypertopic Objects
 - (HTUser*)getUser:(NSString*)u
@@ -44,6 +53,11 @@
 - (HTCorpus*)getCorpus:(NSString *)c
 {
 	return [[[HTCorpus alloc] initWithServer:self withID:c] autorelease];
+}
+- (HTItem*)getItem:(NSString *)i withCorpusID:(NSString *)c
+{
+	HTCorpus *corpus = [[[HTCorpus alloc] initWithServer:self withID:c] autorelease];
+	return [corpus getItem: i];
 }
 
 #pragma mark -

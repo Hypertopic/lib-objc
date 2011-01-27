@@ -32,14 +32,20 @@
     [super dealloc];
 }
 
--(NSDictionary *) getView
+#pragma mark -
+#pragma mark GET views
+-(NSDictionary *) fetchView
 {
 	NSString *urlString = [self getViewUrl];
 	if(urlString == nil) return nil;
 	NSDictionary *view = [self.database httpGet: urlString];
 	view = [self.database normalize:view];
 	DLog(@"View :%@", view);
-	return [view objectForKey:objectID];
+	return view;
+}
+-(NSDictionary *) getView
+{
+	return [[self fetchView] objectForKey:objectID];
 }
 -(NSString *) getViewUrl
 {
@@ -47,6 +53,9 @@
 	DLog(@"Classname: %@", className);
 	if ([className isEqual: @"HTUser"])
 		return [NSString stringWithFormat:@"%@/user/%@", self.database.serverUrl, objectID];
+	if ([className isEqual: @"HTCorpus"])
+		return [NSString stringWithFormat:@"%@/corpus/%@", self.database.serverUrl, objectID];
+	
 	return nil;
 }
 @end
