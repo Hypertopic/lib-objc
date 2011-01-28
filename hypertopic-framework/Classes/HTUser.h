@@ -10,6 +10,7 @@
 #import "HTIdentified.h"
 #import "HTDatabase.h"
 #import "HTCorpus.h"
+#import "HTViewpoint.h"
 
 @interface HTUser : HTIdentified {
 
@@ -17,12 +18,12 @@
 
 #pragma mark -
 #pragma mark List corpora and viewpoints
-- (NSDictionary*)listCorpora;
-- (NSDictionary*)listViewpoints;
+- (NSArray *)listCorpora;
+- (NSArray *)listViewpoints;
 
 #pragma mark -
 #pragma mark Create corpus and viewpoint
-- (BOOL)createViewpoint: (NSString *)name;
-- (HTCorpus*)createCorpus: (NSString *)name;
+- (HTViewpoint *)createViewpoint:(NSString *)name;
+- (HTCorpus *)createCorpus:(NSString *)name;
 
 @end

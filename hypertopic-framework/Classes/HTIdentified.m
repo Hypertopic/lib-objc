@@ -15,7 +15,7 @@
 @synthesize database;
 @synthesize objectID;
 
-- (id) initWithServer:(HTDatabase *)d withID:(NSString *)i
+- (id)initWithServer:(HTDatabase *)d withID:(NSString *)i
 {
 	if( self = [super init])
 	{
@@ -34,7 +34,7 @@
 
 #pragma mark -
 #pragma mark GET views
--(NSDictionary *) fetchView
+- (NSDictionary *)fetchView
 {
 	NSString *urlString = [self getViewUrl];
 	if(urlString == nil) return nil;
@@ -43,11 +43,11 @@
 	DLog(@"View :%@", view);
 	return view;
 }
--(NSDictionary *) getView
+- (NSDictionary *)getView
 {
 	return [[self fetchView] objectForKey:objectID];
 }
--(NSString *) getViewUrl
+- (NSString *)getViewUrl
 {
 	NSString *className = NSStringFromClass([self class]); 
 	DLog(@"Classname: %@", className);
@@ -55,6 +55,8 @@
 		return [NSString stringWithFormat:@"%@/user/%@", self.database.serverUrl, objectID];
 	if ([className isEqual: @"HTCorpus"])
 		return [NSString stringWithFormat:@"%@/corpus/%@", self.database.serverUrl, objectID];
+	if ([className isEqual: @"HTViewpoint"])
+		return [NSString stringWithFormat:@"%@/viewpoint/%@", self.database.serverUrl, objectID];
 	
 	return nil;
 }

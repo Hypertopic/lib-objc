@@ -8,13 +8,14 @@
 
 #import <stdarg.h>
 #import "HTViewpoint.h"
+#import "HTTopic.h"
 #import "HTDatabase.h"
 
 @implementation HTViewpoint
 
 #pragma mark -
 #pragma mark GET topics or items
--(NSArray *) getUpperTopics
+- (NSArray *)getUpperTopics
 {
 	NSDictionary *view = [[self getView] autorelease];
 	NSArray *upper = [view objectForKey:@"upper"];
@@ -22,20 +23,24 @@
 		return upper;
 	return [[[NSArray alloc] array] autorelease];
 }
--(NSArray *) getTopics
+- (NSArray *)getTopics
 {
 	NSDictionary *view = [[self getView] autorelease];
 	NSArray *keys = [view allKeys];
 	return keys;
 }
--(NSArray *) getItems
+- (NSArray *)getItems
 {
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
+- (HTTopic *)getTopic:(NSString *)topicID
+{
+	return [[[HTTopic alloc] initWithViewpoint:self withID:topicID] autorelease];
+}
 
 #pragma mark List users
--(NSArray *) listUsers
+- (NSArray *)listUsers
 {
 	NSDictionary *view = [[self getView] autorelease];
 	NSArray *users = [view objectForKey:@"user"];
@@ -45,13 +50,13 @@
 }
 
 #pragma mark Rename and create topics
-- (BOOL)rename: (NSString *)name
+- (BOOL)rename:(NSString *)name
 {
 	NSMutableDictionary *doc = [self getRaw];
 	[doc setObject:name forKey:@"viewpoint_name"];
 	return [self.database httpPut:[[doc copy] autorelease]];
 }
--(BOOL) createTopic: (NSString *)parentTopicID, ...
+- (BOOL)createTopic:(NSString *)parentTopicID, ...
 {
 	NSString *uuid = [HTDatabase GetUUID];
 	NSMutableDictionary *doc = [[self getRaw] autorelease];

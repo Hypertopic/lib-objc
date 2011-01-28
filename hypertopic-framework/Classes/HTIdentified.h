@@ -16,7 +16,7 @@
 }
 
 /// Initialise a database with a server and object ID.
-- (id)initWithServer:(HTDatabase*)db withID:(NSString*)objectID;
+- (id)initWithServer:(HTDatabase *)db withID:(NSString *)objectID;
 
 /// Database
 @property (readonly) HTDatabase *database;
@@ -24,9 +24,9 @@
 @property (readonly) NSString *objectID;
 
 /// Fetch view from CouchDB server, and normalize it.
--(NSDictionary*)fetchView;
+- (NSDictionary *)fetchView;
 /// Return view by object keys
--(NSDictionary*)getView;
+- (NSDictionary *)getView;
 
--(NSString *)getViewUrl;
+- (NSString *)getViewUrl;
 @end

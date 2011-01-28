@@ -15,12 +15,12 @@
 
 #pragma mark -
 #pragma mark List corpus and viewpoint
-- (NSDictionary*)listCorpora
+- (NSArray *)listCorpora
 {
 	NSDictionary *doc = [self getView];
 	return [doc objectForKey:@"corpus"];
 }
-- (NSDictionary*)listViewpoints
+- (NSArray *)listViewpoints
 {
 	NSDictionary *doc = [self getView];
 	return [doc objectForKey:@"viewpoint"];
@@ -28,7 +28,7 @@
 
 #pragma mark -
 #pragma mark Create corpus and viewpoint
-- (BOOL)createViewpoint: (NSString *)name
+- (HTViewpoint *)createViewpoint:(NSString *)name
 {
 	NSMutableDictionary *doc = [[NSMutableDictionary alloc] initWithCapacity:2];
 	[doc setObject:name forKey: @"viewpoint_name"];
@@ -41,9 +41,9 @@
 	NSString *resultID = [result objectForKey:@"id"];
 	//return self.database getViewpoint
 	DLog(@"new created viewpoint id: %@", resultID);
-	return true;
+	return [self.database getViewpoint:resultID];
 }
-- (HTCorpus *)createCorpus: (NSString *)name
+- (HTCorpus *)createCorpus:(NSString *)name
 {
 	NSMutableDictionary *doc = [[NSMutableDictionary alloc] initWithCapacity:2];
 	[doc setObject:name forKey: @"corpus_name"];

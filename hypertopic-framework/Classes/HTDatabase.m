@@ -10,6 +10,8 @@
 #import "HTUser.h"
 #import "HTCorpus.h"
 #import "HTItem.h"
+#import "HTViewpoint.h"
+#import "HTTopic.h"
 #import "JSON.h"
 
 @implementation HTDatabase
@@ -46,23 +48,36 @@
 
 #pragma mark -
 #pragma mark Get Hypertopic Objects
-- (HTUser*)getUser:(NSString*)u
+- (HTUser *)getUser:(NSString *)u
 {
     return [[[HTUser alloc] initWithServer:self withID:u] autorelease];
 }
-- (HTCorpus*)getCorpus:(NSString *)c
+- (HTCorpus *)getCorpus:(NSString *)c
 {
 	return [[[HTCorpus alloc] initWithServer:self withID:c] autorelease];
 }
-- (HTItem*)getItem:(NSString *)i withCorpusID:(NSString *)c
+- (HTItem *)getItem:(NSString *)i withCorpusID:(NSString *)c
 {
 	HTCorpus *corpus = [[[HTCorpus alloc] initWithServer:self withID:c] autorelease];
 	return [corpus getItem: i];
 }
-
+- (HTItem *)getItem:(NSDictionary *)item
+{
+	NSString *corpusID = [item objectForKey:@"corpus"];
+	NSString *itemID = [item objectForKey:@"item"];
+	return [self getItem:itemID withCorpusID:corpusID];
+}
+- (HTViewpoint *)getViewpoint:(NSString *)viewpointID
+{
+	return [[[HTViewpoint alloc] initWithServer:self withID:viewpointID] autorelease];
+}
+- (HTTopic *)getTopic:(NSString *)topicID withViewpointID:(NSString *)viewpointID 
+{
+	return [[HTTopic alloc] initWithViewpoint: [[self getViewpoint: viewpointID] autorelease] withID: topicID];
+}
 #pragma mark -
 #pragma mark HTTP requests
-- (NSDictionary*)normalize:(NSDictionary *)doc
+- (NSDictionary *)normalize:(NSDictionary *)doc
 {
 	NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
 	NSArray *rows = [doc objectForKey:@"rows"];
@@ -79,15 +94,16 @@
 		NSDictionary *value = [row objectForKey:@"value"];
 		for(NSString *attribute in value)
 		{
-			NSArray *v = [current objectForKey:attribute];
-			if(v == nil)
-				v = [NSArray arrayWithObject:[value objectForKey:attribute]];
+			NSMutableArray *v = [current objectForKey:attribute];
+			if(v == nil || [v count] == 0)
+				v = [NSMutableArray arrayWithObject:[value objectForKey:attribute]];
 			else
-				[v arrayByAddingObject: [value objectForKey:attribute]];
-
+				[v addObject: [value objectForKey:attribute]];
+			DLog(@"Array is %@", [v JSONRepresentation]);
 			[current setObject:v forKey:attribute];
 		}
 	}
+	DLog(@"doc : %@", doc);
 	DLog(@"result : %@", result);
 	return result;
 }
@@ -119,7 +135,7 @@
 {
 	NSString *docID = [doc objectForKey:@"_id"];
 	NSString *docRev = [doc objectForKey:@"_rev"];
-	NSString *urlString = [NSString stringWithFormat:@"%@/%@?_rev=%@", self.serverUrl, docID, docRev];
+	NSString *urlString = [NSString stringWithFormat:@"%@/%@?rev=%@", self.serverUrl, docID, docRev];
 	DLog(@"HTTP DELETE Request on URL: %@", urlString);
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -132,11 +148,11 @@
 	DLog(@"DELETE URL Status Code %i", [response statusCode]);
 	return (200 == [response statusCode]);
 }
-- (BOOL)httpPut:(NSDictionary*)doc
+- (BOOL)httpPut:(NSDictionary *)doc
 {
 	NSString *docID = [doc objectForKey:@"_id"];
 	NSString *docRev = [doc objectForKey:@"_rev"];
-	NSString *urlString = [NSString stringWithFormat:@"%@/%@?_rev=%@", self.serverUrl, docID, docRev];
+	NSString *urlString = [NSString stringWithFormat:@"%@/%@?rev=%@", self.serverUrl, docID, docRev];
 	DLog(@"HTTP DELETE Request on URL: %@", urlString);
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -156,7 +172,7 @@
 	DLog(@" URL Status Code %i", [response statusCode]);
     return (201 == [response statusCode] || 205 == [response statusCode]);
 }
-- (NSDictionary *)httpPost:(NSDictionary*)doc
+- (NSDictionary *)httpPost:(NSDictionary *)doc
 {
 	
 	NSURL *url = [NSURL URLWithString:self.serverUrl];

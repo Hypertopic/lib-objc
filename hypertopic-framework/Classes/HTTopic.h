@@ -16,16 +16,16 @@
 
 @property (readonly) HTViewpoint *viewpoint;
 
-- (id)initWithViewpoint: (HTViewpoint *) v withID: (NSString *) i;
+- (id)initWithViewpoint:(HTViewpoint *)v withID:(NSString *)i;
 - (NSString *)getViewpointID;
 
 - (NSArray *)getNarrower;
 - (NSArray *)getBroader;
 - (NSArray *)getItems;
 
--(BOOL)rename:(NSString *)name;
--(BOOL)destroy;
--(BOOL)moveTopics: (HTTopic *)narrowerTopic, ...;
--(BOOL)unlink;
--(BOOL)linkTopics: (HTTopic *)narrowerTopic, ...;
+- (BOOL)rename:(NSString *)name;
+- (BOOL)destroy;
+- (BOOL)moveTopics:(HTTopic *)narrowerTopic, ...;
+- (BOOL)unlink;
+- (BOOL)linkTopics:(HTTopic *)narrowerTopic, ...;
 @end

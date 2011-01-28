@@ -16,9 +16,9 @@
 
 - (NSArray *)listUsers;
 
-- (BOOL)rename: (NSString *)name;
+- (BOOL)rename:(NSString *)name;
 
-- (HTItem *) getItem: (NSString *) itemID;
-- (BOOL)createItem: (NSString *)name;
+- (HTItem *)getItem:(NSString *)itemID;
+- (BOOL)createItem:(NSString *)name;
 
 @end

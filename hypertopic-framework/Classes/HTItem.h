@@ -16,8 +16,8 @@
 
 @property (readonly) HTCorpus *corpus;
 
-- (id)initWithCorpus: (HTCorpus *) c withID: (NSString *) i;
-- (NSString *)getCorpusID;
-- (BOOL)rename: (NSString *)name;
+- (id) initWithCorpus: (HTCorpus *)c withID: (NSString *)i;
+- (NSString *) getCorpusID;
+- (BOOL) rename:(NSString *)name;
 
 @end

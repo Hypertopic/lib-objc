@@ -13,6 +13,6 @@
 
 }
 
-- (NSMutableDictionary*)getRaw;
+- (NSMutableDictionary *)getRaw;
 - (BOOL)destroy;
 @end

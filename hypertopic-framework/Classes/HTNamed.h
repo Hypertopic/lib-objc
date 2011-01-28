@@ -13,5 +13,5 @@
 
 }
 
-- (NSString*)getName;
+- (NSString *)getName;
 @end

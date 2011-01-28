@@ -13,7 +13,7 @@
 
 @synthesize corpus;
 
-- (id)initWithCorpus: (HTCorpus *) c withID: (NSString *) i
+- (id)initWithCorpus:(HTCorpus *)c withID:(NSString *)i
 {
 	if(self = [super init])
 	{
@@ -28,7 +28,7 @@
 	return self.corpus.objectID;
 }
 
-- (BOOL)rename: (NSString *)name
+- (BOOL)rename:(NSString *)name
 {
 	NSMutableDictionary *doc = [self getRaw];
 	[doc setObject:name forKey:@"item_name"];
@@ -37,7 +37,7 @@
 
 #pragma mark -
 #pragma mark Override getView and getViewUrl method
-- (NSDictionary *) getView
+- (NSDictionary *)getView
 {
 	return [[[self fetchView] objectForKey:corpus.objectID] objectForKey:objectID];
 }

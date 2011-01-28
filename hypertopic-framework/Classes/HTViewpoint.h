@@ -10,16 +10,22 @@
 #import "HTDatabase.h"
 #import "HTRegistered.h"
 
+@class HTTopic;
+
 @interface HTViewpoint : HTRegistered {
 	
 }
 
--(NSArray *) getUpperTopics;
--(NSArray *) getTopics;
--(NSArray *) getItems;
--(NSArray *) listUsers;
+- (NSArray *)getUpperTopics;
+- (NSArray *)getTopics;
+- (NSArray *)getItems;
 
--(BOOL) rename: (NSString *)name;
+- (HTTopic *)getTopic:(NSString *)topicID;
 
--(BOOL) createTopic: (NSString *)parentTopicID, ...;
+- (NSArray *)listUsers;
+
+- (BOOL)rename:(NSString *)name;
+
+- (BOOL)createTopic:(NSString *)parentTopicID, ...;
+
 @end

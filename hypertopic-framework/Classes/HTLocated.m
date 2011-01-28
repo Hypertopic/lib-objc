@@ -9,12 +9,12 @@
 #import "HTLocated.h"
 
 @implementation HTLocated
--(NSDictionary *) getRaw
+- (NSDictionary *) getRaw
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/%@", self.database.serverUrl, objectID];
 	return [self.database httpGet:urlString];
 }
--(BOOL)destroy
+- (BOOL)destroy
 {
 	return [self.database httpDelete:[self getRaw]];
 }

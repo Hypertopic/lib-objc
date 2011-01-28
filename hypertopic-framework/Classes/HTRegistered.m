@@ -10,10 +10,8 @@
 #import "HTDatabase.h"
 
 @implementation HTRegistered
--(BOOL) registerUser:(NSString *)userID
+- (BOOL)registerUser:(NSString *)userID
 {
-	[self doesNotRecognizeSelector:_cmd];
-	return false;
 	NSMutableDictionary *doc = [[[self getRaw] mutableCopy] autorelease];
 	NSArray *users = [doc objectForKey:@"users"];
 	if (users == nil)
@@ -23,7 +21,7 @@
 	
 	return [self.database httpPut:[[doc copy] autorelease]];
 }
--(BOOL) unRegisterUser:(NSString *)userID
+- (BOOL)unRegisterUser:(NSString *)userID
 {
 	[self doesNotRecognizeSelector:_cmd];
 	return false;

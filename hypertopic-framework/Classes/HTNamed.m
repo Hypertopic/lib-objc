@@ -7,16 +7,18 @@
 //
 
 #import "HTNamed.h"
-
+#import "JSON.h"
 
 @implementation HTNamed
 
--(NSString *)getName
+- (NSString *)getName
 {
-	NSArray *names = [[self getView] objectForKey:@"name"];
-	if(names != nil && [names count] > 0)
-	{
-		return [&names[0] description];
+	NSDictionary *view = [[self getView] autorelease];
+	//DLog(@"json view: %@", [view JSONRepresentation]);
+	NSArray *names = [view objectForKey:@"name"];
+	
+	if ([names count] > 0) {
+		return [names objectAtIndex:0];
 	}
 	return nil;
 }

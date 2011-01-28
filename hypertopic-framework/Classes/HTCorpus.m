@@ -19,17 +19,17 @@
 	return [view objectForKey:@"user"];
 }
 
-- (BOOL)rename: (NSString *)name
+- (BOOL)rename:(NSString *)name
 {
 	NSMutableDictionary *doc = [self getRaw];
 	[doc setObject:name forKey:@"corpus_name"];
 	return [self.database httpPut:[[doc copy] autorelease]];
 }
-- (HTItem *) getItem: (NSString *) itemID
+- (HTItem *)getItem:(NSString *)itemID
 {
 	return [[[HTItem alloc] initWithCorpus: self withID: itemID] autorelease];
 }
-- (BOOL)createItem: (NSString *)name
+- (BOOL)createItem:(NSString *)name
 {
 	NSMutableDictionary *doc = [[NSMutableDictionary alloc] initWithCapacity:2];
 	[doc setObject:name forKey: @"item_name"];

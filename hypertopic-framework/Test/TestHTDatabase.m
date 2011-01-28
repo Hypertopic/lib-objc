@@ -19,8 +19,7 @@
 @implementation Database 
 
 - (void)setUp {
-    database = [HTDatabase new];
-    srandom(time(NULL));
+    database = [[HTDatabase alloc] initWithServerUrl : @"http://127.0.0.1:5984/test"];
 }
 
 - (void)tearDown {
@@ -29,6 +28,39 @@
 
 - (void) testDefaultServerUrl
 {
-	STAssertEqualObjects(database.serverUrl, @"http://localhost:5984", nil);
+	STAssertEqualObjects(database.serverUrl, @"http://127.0.0.1:5984/test", nil);
 }
+
+- (void) testHttpMethod
+{
+	NSMutableDictionary *doc = [NSMutableDictionary new];
+	[doc setObject:@"example" forKey:@"name"];
+	NSLog(@"example document: %@", doc);
+	/// Create a document
+	NSDictionary *new = [database httpPost:[[doc copy] autorelease]];
+	NSLog(@"new created document: %@", new);
+	STAssertNotNil(new, nil);
+	
+	NSString *docID = [new objectForKey:@"id"];
+	NSString *docRev = [new objectForKey:@"rev"];
+	NSLog(@"new created document ID: %@", docID);
+	
+	NSString *urlString = [NSString stringWithFormat:@"%@/%@?rev=%@", database.serverUrl, docID, docRev];
+	NSLog(@"Document URL: %@", docID);
+	[doc setObject:@"updated" forKey:@"name"];
+	[doc setObject:docID forKey:@"_id"];
+	[doc setObject:docRev forKey:@"_rev"];
+	NSLog(@"Document to update: %@", doc);
+	
+	BOOL updated = [database httpPut: doc];
+	STAssertTrue(updated, nil);
+	
+	urlString = [NSString stringWithFormat:@"%@/%@", database.serverUrl, docID];
+	NSDictionary *updatedDoc = [database httpGet:urlString];
+	STAssertEqualObjects([updatedDoc objectForKey:@"name"], @"updated", nil);
+	
+	NSLog(@"Document to delete: %@", updatedDoc);
+	STAssertTrue([database httpDelete:updatedDoc], nil);
+}
+
 @end
