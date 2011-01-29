@@ -45,7 +45,16 @@
 	CFRelease(theUUID);
 	return [(NSString *)string autorelease];
 }
-
++ (BOOL)isReserved:(NSString *)key;
+{
+	return [@"highlight" isEqual:key]
+	|| [@"name" isEqual:key]
+	|| [@"resource" isEqual:key]
+	|| [@"thumbnail" isEqual:key]
+	|| [@"topic" isEqual:key]
+	|| [@"upper" isEqual:key]
+	|| [@"user" isEqual:key];
+}
 #pragma mark -
 #pragma mark Get Hypertopic Objects
 - (HTUser *)getUser:(NSString *)u

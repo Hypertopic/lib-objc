@@ -15,10 +15,11 @@
 }
 
 - (NSArray *)listUsers;
+- (NSArray *)getItems;
 
 - (BOOL)rename:(NSString *)name;
 
 - (HTItem *)getItem:(NSString *)itemID;
-- (BOOL)createItem:(NSString *)name;
+- (HTItem *)createItem:(NSString *)name;
 
 @end

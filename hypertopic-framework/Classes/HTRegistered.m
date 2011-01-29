@@ -13,17 +13,26 @@
 - (BOOL)registerUser:(NSString *)userID
 {
 	NSMutableDictionary *doc = [[[self getRaw] mutableCopy] autorelease];
-	NSArray *users = [doc objectForKey:@"users"];
-	if (users == nil)
-		[doc setObject:[[NSArray alloc] initWithObjects:userID,nil] forKey:@"users"];
+	NSMutableArray *users = [doc objectForKey:@"users"];
+	if (users == nil || [users count] == 0)
+		[doc setObject:[[NSMutableArray alloc] initWithObjects:userID,nil] forKey:@"users"];
 	else
-		[doc setObject:[users arrayByAddingObject:userID] forKey: @"users"];
-	
+	{
+		[users addObject:userID];
+		[doc setObject:users forKey: @"users"];
+	}
 	return [self.database httpPut:[[doc copy] autorelease]];
 }
-- (BOOL)unRegisterUser:(NSString *)userID
+- (BOOL)unregisterUser:(NSString *)userID
 {
-	[self doesNotRecognizeSelector:_cmd];
-	return false;
+	//[self doesNotRecognizeSelector:_cmd];
+	//return false;
+	NSMutableDictionary *doc = [[[self getRaw] mutableCopy] autorelease];
+	NSMutableArray *users = [doc objectForKey:@"users"];
+	if (users == nil || [users count] == 0)
+		return true;
+	[users removeObject:userID];
+	[doc setObject:users forKey: @"users"];
+	return [self.database httpPut:[[doc copy] autorelease]];
 }
 @end

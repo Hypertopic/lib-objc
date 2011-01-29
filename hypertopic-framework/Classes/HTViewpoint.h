@@ -26,6 +26,9 @@
 
 - (BOOL)rename:(NSString *)name;
 
-- (BOOL)createTopic:(NSString *)parentTopicID, ...;
+- (HTTopic *)createTopicWithName:(NSString *)name;
+
+- (HTTopic *)createTopic;
+- (HTTopic *)createTopic:(HTTopic *)parentTopicID, ...;
 
 @end

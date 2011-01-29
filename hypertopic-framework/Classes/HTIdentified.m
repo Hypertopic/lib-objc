@@ -31,7 +31,10 @@
     [objectID release];
     [super dealloc];
 }
-
+- (NSString *)getID
+{
+	return self.objectID;
+}
 #pragma mark -
 #pragma mark GET views
 - (NSDictionary *)fetchView

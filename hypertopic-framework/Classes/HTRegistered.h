@@ -14,6 +14,6 @@
 }
 
 - (BOOL)registerUser:(NSString *)userID;
-- (BOOL)unRegisterUser:(NSString *)userID;
+- (BOOL)unregisterUser:(NSString *)userID;
 
 @end

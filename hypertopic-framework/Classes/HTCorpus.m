@@ -18,7 +18,16 @@
 	NSDictionary *view = [self getView];
 	return [view objectForKey:@"user"];
 }
-
+- (NSArray *)getItems
+{
+	NSMutableArray *result = [NSMutableArray new];
+	NSArray *keys = [[self getView] allKeys];
+	for(NSString *key in keys)
+		if (![HTDatabase isReserved:key])
+			[result addObject:[self getItem:key]];
+	
+	return [result autorelease];
+}
 - (BOOL)rename:(NSString *)name
 {
 	NSMutableDictionary *doc = [self getRaw];
@@ -29,7 +38,7 @@
 {
 	return [[[HTItem alloc] initWithCorpus: self withID: itemID] autorelease];
 }
-- (BOOL)createItem:(NSString *)name
+- (HTItem *)createItem:(NSString *)name
 {
 	NSMutableDictionary *doc = [[NSMutableDictionary alloc] initWithCapacity:2];
 	[doc setObject:name forKey: @"item_name"];
@@ -41,6 +50,15 @@
 	DLog(@"returned: %@", result);
 	NSString *resultID = [result objectForKey:@"id"];
 	DLog(@"new created item id: %@", resultID);
-	return true;
+	return [self getItem:resultID];
+}
+
+//Override destroy method
+- (BOOL)destroy
+{
+	NSArray *items = [self getItems];
+	for(HTItem *item in items)
+		[item destroy];
+	return [super destroy];
 }
 @end

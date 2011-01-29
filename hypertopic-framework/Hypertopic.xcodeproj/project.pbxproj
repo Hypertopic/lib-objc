@@ -12,7 +12,7 @@
 		E529027412F07CB8007DF4BB /* HTItem.h in Headers */ = {isa = PBXBuildFile; fileRef = E529027212F07CB8007DF4BB /* HTItem.h */; };
 		E529027512F07CB8007DF4BB /* HTItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E529027312F07CB8007DF4BB /* HTItem.m */; };
 		E535EC7D12EB1A3700875C5B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E535EC7C12EB1A3700875C5B /* LICENSE */; };
-		E53985FC12F1CE7400824D72 /* testHypertopic.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A0216512F18E1C00654AC0 /* testHypertopic.m */; };
+		E53985FC12F1CE7400824D72 /* TestHypertopic.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A0216512F18E1C00654AC0 /* TestHypertopic.m */; };
 		E547FFB312EC0AEC0015E072 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E547FFA012EC0AEC0015E072 /* JSON.h */; };
 		E547FFB412EC0AEC0015E072 /* NSObject+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E547FFA112EC0AEC0015E072 /* NSObject+JSON.h */; };
 		E547FFB512EC0AEC0015E072 /* NSObject+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E547FFA212EC0AEC0015E072 /* NSObject+JSON.m */; };
@@ -97,7 +97,7 @@
 		E547FFB112EC0AEC0015E072 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		E547FFB212EC0AEC0015E072 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		E547FFDB12EC66210015E072 /* HTDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTDatabase.h; path = Classes/HTDatabase.h; sourceTree = "<group>"; };
-		E5A0216512F18E1C00654AC0 /* testHypertopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = testHypertopic.m; path = Test/testHypertopic.m; sourceTree = "<group>"; };
+		E5A0216512F18E1C00654AC0 /* TestHypertopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestHypertopic.m; path = Test/TestHypertopic.m; sourceTree = "<group>"; };
 		E5BE7CAD12EE8615009EA513 /* HTUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTUser.h; path = Classes/HTUser.h; sourceTree = "<group>"; };
 		E5C16F6E12F10E1C00029630 /* HTViewpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTViewpoint.m; path = Classes/HTViewpoint.m; sourceTree = "<group>"; };
 		E5C16FB912F12A4400029630 /* HTTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTTopic.h; path = Classes/HTTopic.h; sourceTree = "<group>"; };
@@ -295,7 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				E5D8670412EED55A001FD018 /* TestHTDatabase.m */,
-				E5A0216512F18E1C00654AC0 /* testHypertopic.m */,
+				E5A0216512F18E1C00654AC0 /* TestHypertopic.m */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -463,7 +463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E53985FC12F1CE7400824D72 /* testHypertopic.m in Sources */,
+				E53985FC12F1CE7400824D72 /* TestHypertopic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

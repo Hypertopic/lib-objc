@@ -24,63 +24,64 @@
 	}
 	return self;
 }
+
 - (NSString *)getViewpointID
 {
 	return self.viewpoint.objectID;
 }
 - (NSArray *)getNarrower
 {
-	NSDictionary *view = [[self getView] autorelease];
-	NSArray *narrowers = [[view objectForKey:@"narrower"] autorelease];
-	NSArray *result = [[NSArray alloc] array];
+	NSDictionary *view = [self getView];
+	NSArray *narrowers = [view objectForKey:@"narrower"];
+	NSMutableArray *result = [NSMutableArray new];
 					   
 	for(NSString *narrower in narrowers)
-		[result arrayByAddingObject: [viewpoint getTopic:narrower]];
+		[result addObject: [viewpoint getTopic:narrower]];
 	
 	return [result autorelease];
 }
 - (NSArray *)getBroader
 {
-	NSDictionary *view = [[self getView] autorelease];
+	NSDictionary *view = [self getView];
 	NSArray *broaders = [[view objectForKey:@"broader"] autorelease];
-	NSArray *result = [[NSArray alloc] array];
+	NSMutableArray *result = [NSMutableArray new];
 	
 	for(NSString *broader in broaders)
-		[result arrayByAddingObject: [viewpoint getTopic:broader]];
+		[result addObject: [viewpoint getTopic:broader]];
 	
 	return [result autorelease];
 }
 - (NSArray *)getItems
 {
-	NSMutableArray *result = [[[NSMutableArray alloc] array] autorelease];
-	NSArray *items = [[[self getView] objectForKey:@"item"] autorelease];
+	NSMutableArray *result = [NSMutableArray new];
+	NSArray *items = [[self getView] objectForKey:@"item"];
 	for(NSDictionary *item in items)
 	{
-		[result arrayByAddingObject:[database getItem: item]];
+		[result addObject:[database getItem: item]];
 	}
-	NSArray *narrowers = [[self getNarrower] autorelease];
+	NSArray *narrowers = [self getNarrower];
 	for(HTTopic *topic in narrowers)
-		[result addObjectsFromArray: [topic getItems]];
+		[result addObject: [topic getItems]];
 	return [[result copy] autorelease];
 }
 
 - (BOOL)rename:(NSString *)name
 {
-	NSMutableDictionary *doc = [[viewpoint getRaw] autorelease];
-	NSMutableDictionary *topics = [[doc objectForKey:@"topics"] autorelease];
-	NSMutableDictionary *topic = [[topics objectForKey:objectID] autorelease];
+	NSMutableDictionary *doc = [viewpoint getRaw];
+	NSMutableDictionary *topics = [doc objectForKey:@"topics"];
+	NSMutableDictionary *topic = [topics objectForKey:objectID];
 	[topic setObject:name forKey:@"name"];
 	return [self.database httpPut:[[doc copy] autorelease]];
 }
 - (BOOL)destroy
 {
-	NSMutableDictionary *doc = [[viewpoint getRaw] autorelease];
+	NSMutableDictionary *doc = [viewpoint getRaw];
 	[[doc objectForKey:@"topics"] removeObjectForKey: objectID];
-	NSMutableDictionary *topics = [[doc objectForKey:@"topics"] autorelease];
+	NSMutableDictionary *topics = [doc objectForKey:@"topics"];
 	NSArray *topicIDs = [topics allKeys];
 	for(NSString *topicID in topicIDs)
 	{
-		NSMutableArray *broader = [[topics objectForKey:topicID] autorelease];
+		NSMutableArray *broader = [topics objectForKey:topicID];
 		[broader removeObject:objectID];
 	}
 	return [self.database httpPut:[[doc copy] autorelease]];
@@ -88,18 +89,18 @@
 - (BOOL)moveTopics:(HTTopic *)narrowerTopic, ...
 {
 	va_list args;
-	NSMutableDictionary *doc = [[viewpoint getRaw] autorelease];
-	NSMutableDictionary *topics = [[doc objectForKey:@"topics"] autorelease];
-	NSArray *broader = [[[NSArray alloc] initWithObjects:objectID,nil] autorelease];
+	NSMutableDictionary *doc = [viewpoint getRaw];
+	NSMutableDictionary *topics = [doc objectForKey:@"topics"];
+	NSArray *broader = [[NSArray alloc] initWithObjects:objectID,nil];
 	
-	NSArray *narrowerTopics = [[[NSArray alloc] array] autorelease];
+	NSMutableArray *narrowerTopics = [NSMutableArray new];
 	if (narrowerTopic)
 	{
-		[narrowerTopics arrayByAddingObject:narrowerTopic];
+		[narrowerTopics addObject:[narrowerTopic getID]];
 		va_start(args, narrowerTopic);
-		NSString *topicID;
-		while (topicID = va_arg(args, NSString *))
-			[narrowerTopics arrayByAddingObject:topicID];
+		HTTopic *t;
+		while (t = va_arg(args, HTTopic *))
+			[narrowerTopics addObject:[t getID]];
 		va_end(args);
 	}
 	for(NSString *topicID in narrowerTopics)
@@ -108,29 +109,29 @@
 }
 - (BOOL)unlink
 {
-	NSMutableDictionary *doc = [[viewpoint getRaw] autorelease];
-	NSMutableDictionary *topics = [[doc objectForKey:@"topics"] autorelease];
-	[[topics objectForKey:objectID] setObject:[[[NSArray alloc] array] autorelease] forKey:@"broader"];
+	NSMutableDictionary *doc = [viewpoint getRaw];
+	NSMutableDictionary *topics = [doc objectForKey:@"topics"];
+	[[topics objectForKey:objectID] setObject:[NSArray new] forKey:@"broader"];
 	return [self.database httpPut:[[doc copy] autorelease]];
 }
 - (BOOL)linkTopics: (HTTopic *)narrowerTopic, ...
 {
 	va_list args;
-	NSMutableDictionary *doc = [[viewpoint getRaw] autorelease];
-	NSMutableDictionary *topics = [[doc objectForKey:@"topics"] autorelease];
-	NSArray *narrowerTopics = [[[NSArray alloc] array] autorelease];
+	NSMutableDictionary *doc = [viewpoint getRaw];
+	NSMutableDictionary *topics = [doc objectForKey:@"topics"];
+	NSMutableArray *narrowerTopics = [NSMutableArray new];
 	if (narrowerTopic)
 	{
-		[narrowerTopics arrayByAddingObject:narrowerTopic];
+		[narrowerTopics addObject:[narrowerTopic getID]];
 		va_start(args, narrowerTopic);
-		NSString *topicID;
-		while (topicID = va_arg(args, NSString *))
-			[narrowerTopics arrayByAddingObject:topicID];
+		HTTopic *t;
+		while (t = va_arg(args, HTTopic *))
+			[narrowerTopics addObject:[t getID]];
 		va_end(args);
 	}
 	for(NSString *topicID in narrowerTopics)
 		if ([[topics objectForKey:topicID] objectForKey:@"broader"]) 
-			[[[topics objectForKey:topicID] objectForKey:@"broader"] arrayByAddingObject: objectID];
+			[[[topics objectForKey:topicID] objectForKey:@"broader"] addObject: objectID];
 		else
 			[[topics objectForKey:topicID] setObject:[[[NSArray alloc] initWithObjects:objectID,nil] autorelease] forKey:@"broader"];
 	return [self.database httpPut:[[doc copy] autorelease]];

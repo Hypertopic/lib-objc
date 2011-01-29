@@ -17,20 +17,27 @@
 #pragma mark GET topics or items
 - (NSArray *)getUpperTopics
 {
-	NSDictionary *view = [[self getView] autorelease];
+	NSDictionary *view = [self getView];
 	NSArray *upper = [view objectForKey:@"upper"];
+	NSMutableArray *result = [NSMutableArray new];
 	if (upper)
-		return upper;
-	return [[[NSArray alloc] array] autorelease];
+		for(NSString *topicID in upper)
+			[result addObject:[self getTopic:topicID]];
+	return [[result copy] autorelease];
 }
 - (NSArray *)getTopics
 {
-	NSDictionary *view = [[self getView] autorelease];
+	NSDictionary *view = [self getView];
 	NSArray *keys = [view allKeys];
-	return keys;
+	NSMutableArray *result = [NSMutableArray new];
+	for(NSString *key in keys)
+		if (![HTDatabase isReserved:key]) 		
+			[result addObject:[self getTopic:key]];
+	return [[result copy] autorelease];
 }
 - (NSArray *)getItems
 {
+	//TODO return HTItem array
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
@@ -42,11 +49,11 @@
 #pragma mark List users
 - (NSArray *)listUsers
 {
-	NSDictionary *view = [[self getView] autorelease];
+	NSDictionary *view = [self getView];
 	NSArray *users = [view objectForKey:@"user"];
 	if (users)
 		return users;
-	return [[[NSArray alloc] array] autorelease];
+	return [[NSArray new] autorelease];
 }
 
 #pragma mark Rename and create topics
@@ -56,27 +63,61 @@
 	[doc setObject:name forKey:@"viewpoint_name"];
 	return [self.database httpPut:[[doc copy] autorelease]];
 }
-- (BOOL)createTopic:(NSString *)parentTopicID, ...
+- (HTTopic *)createTopicWithName:(NSString *)name
 {
 	NSString *uuid = [HTDatabase GetUUID];
-	NSMutableDictionary *doc = [[self getRaw] autorelease];
-	NSMutableDictionary *topics = [[doc objectForKey:@"topics"] autorelease];
-	NSMutableDictionary *topic = [[[NSMutableDictionary alloc] initWithCapacity:1] autorelease];
+	NSMutableDictionary *doc = [self getRaw];
+	NSMutableDictionary *topics = ([doc objectForKey:@"topics"]) ? [doc objectForKey:@"topics"] : [NSMutableDictionary new];
+	NSMutableDictionary *topic = [NSMutableDictionary new];
+	
+	[topic setObject:[NSArray new] forKey:@"broader"];
+	[topic setObject:name forKey:@"name"];
+	[topics setObject:topic forKey:uuid];
+	[doc setObject:topics forKey:@"topics"];
+	if ([self.database httpPut:[[doc copy] autorelease]])
+		return [[HTTopic alloc] initWithViewpoint:self withID:uuid];
+	return nil;
+}
+- (HTTopic *)createTopic
+{
+	NSString *uuid = [HTDatabase GetUUID];
+	NSMutableDictionary *doc = [self getRaw];
+	DLog(@"topic wiil be created on viewpoint: %@", doc );
+	NSMutableDictionary *topics = ([doc objectForKey:@"topics"]) ? [doc objectForKey:@"topics"] : [NSMutableDictionary new];
+	NSMutableDictionary *topic = [NSMutableDictionary new];
+	
+	[topic setObject:[NSArray new] forKey:@"broader"];
+	
+	[topics setObject:topic forKey:uuid];
+	[doc setObject:topics forKey:@"topics"];
+	DLog(@"topic created on viewpoint: %@", doc);
+	if ([self.database httpPut:[[doc copy] autorelease]])
+		return [[HTTopic alloc] initWithViewpoint:self withID:uuid];
+	return nil;
+}
+- (HTTopic *)createTopic:(HTTopic *)parentTopic, ...
+{
+	NSString *uuid = [HTDatabase GetUUID];
+	NSMutableDictionary *doc = [self getRaw];
+	NSMutableDictionary *topics = ([doc objectForKey:@"topics"]) ? [doc objectForKey:@"topics"] : [NSMutableDictionary new];
+	NSMutableDictionary *topic = [NSMutableDictionary new];
 	
 	va_list args;
-	NSArray *broader = [[[NSArray alloc] array] autorelease];
-	if (parentTopicID)
+	NSMutableArray *broader = [NSMutableArray new];
+	if (parentTopic)
 	{
-		[broader arrayByAddingObject:parentTopicID];
-		va_start(args, parentTopicID);
-		NSString *broaderID;
-		while (broaderID = va_arg(args, NSString *))
-			[broader arrayByAddingObject:broaderID];
+		[broader addObject:[parentTopic getID]];
+		va_start(args, parentTopic);
+		HTTopic *broaderTopic;
+		while (broaderTopic = va_arg(args, HTTopic *))
+			[broader addObject:[broaderTopic getID]];
 		va_end(args);
 	}
 	[topic setObject:broader forKey:@"broader"];
 	[topics setObject:topic forKey:uuid];
 	[doc setObject:topics forKey:@"topics"];
-	return [self.database httpPut:[[doc copy] autorelease]];
+	if ([self.database httpPut:[[doc copy] autorelease]])
+		return [[HTTopic alloc] initWithViewpoint:self withID:uuid];
+	return nil;
 }
 @end

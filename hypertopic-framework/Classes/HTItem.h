@@ -20,4 +20,12 @@
 - (NSString *) getCorpusID;
 - (BOOL) rename:(NSString *)name;
 
+- (NSString *)getResource;
+- (NSArray *)getTopics;
+- (NSDictionary *)getAttributes;
+- (BOOL) describe:(NSString *)name withValue:(NSString *)value;
+- (BOOL) undescribe:(NSString *)name withValue:(NSString *)value;
+- (BOOL) tag:(HTTopic *)topic;
+- (BOOL) untag:(HTTopic *)topic;
+
 @end

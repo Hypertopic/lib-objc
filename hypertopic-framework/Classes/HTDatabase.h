@@ -25,6 +25,7 @@
 @property (readonly) NSString *serverUrl;
 
 + (NSString *)GetUUID;
++ (BOOL)isReserved:(NSString *)key;
 
 /// Returns an hypertopic object.
 - (HTUser *)getUser:(NSString *)userID;
