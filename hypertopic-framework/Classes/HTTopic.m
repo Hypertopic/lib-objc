@@ -35,8 +35,8 @@
 	NSArray *narrowers = [view objectForKey:@"narrower"];
 	NSMutableArray *result = [NSMutableArray new];
 					   
-	for(NSString *narrower in narrowers)
-		[result addObject: [viewpoint getTopic:narrower]];
+	for(NSDictionary *narrower in narrowers)
+		[result addObject: [viewpoint getTopic:[narrower objectForKey:@"id"]]];
 	
 	return [result autorelease];
 }
@@ -46,8 +46,8 @@
 	NSArray *broaders = [[view objectForKey:@"broader"] autorelease];
 	NSMutableArray *result = [NSMutableArray new];
 	
-	for(NSString *broader in broaders)
-		[result addObject: [viewpoint getTopic:broader]];
+	for(NSDictionary *broader in broaders)
+		[result addObject: [viewpoint getTopic:[broader objectForKey:@"id"]]];
 	
 	return [result autorelease];
 }
@@ -61,7 +61,12 @@
 	}
 	NSArray *narrowers = [self getNarrower];
 	for(HTTopic *topic in narrowers)
-		[result addObject: [topic getItems]];
+	{
+		DLog(@"Topic name:%@", [topic getName]);
+		NSArray *subItems = [topic getItems];
+		if ([subItems count] > 0)
+			[result addObjectsFromArray:subItems];
+	}
 	return [[result copy] autorelease];
 }
 
@@ -76,14 +81,23 @@
 - (BOOL)destroy
 {
 	NSMutableDictionary *doc = [viewpoint getRaw];
+	DLog(@"%@", doc);
 	[[doc objectForKey:@"topics"] removeObjectForKey: objectID];
 	NSMutableDictionary *topics = [doc objectForKey:@"topics"];
 	NSArray *topicIDs = [topics allKeys];
+	DLog(@"objectID: %@", objectID);
 	for(NSString *topicID in topicIDs)
 	{
-		NSMutableArray *broader = [topics objectForKey:topicID];
-		[broader removeObject:objectID];
+		DLog(@"topicID: %@", topicID);
+		NSMutableArray *broader = [[topics objectForKey:topicID] objectForKey:@"broader"];
+		if (broader && [broader count] > 0)
+			DLog(@"broader:%@", [broader objectAtIndex:0]);
+		
+		if ([broader containsObject:objectID])
+			[broader removeObject:objectID];
+			
 	}
+	DLog(@"%@", doc);
 	return [self.database httpPut:[[doc copy] autorelease]];
 }
 - (BOOL)moveTopics:(HTTopic *)narrowerTopic, ...
@@ -140,6 +154,9 @@
 #pragma mark Override getView and getViewUrl method
 - (NSDictionary *)getView
 {
+	DLog(@"Viewpoint ID:%@", viewpoint.objectID);
+	DLog(@"Topic ID:%@", objectID);
+	
 	return [[[self fetchView] objectForKey:viewpoint.objectID] objectForKey:objectID];
 }
 - (NSString *)getViewUrl

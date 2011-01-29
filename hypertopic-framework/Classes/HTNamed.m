@@ -13,8 +13,8 @@
 
 - (NSString *)getName
 {
-	NSDictionary *view = [[self getView] autorelease];
-	//DLog(@"json view: %@", [view JSONRepresentation]);
+	NSDictionary *view = [self getView];
+	DLog(@"view: %@", view);
 	NSArray *names = [view objectForKey:@"name"];
 	
 	if ([names count] > 0) {

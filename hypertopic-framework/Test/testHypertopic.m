@@ -190,22 +190,51 @@
 	
 	NSLog(@"Viewpoint: %@", [viewpoint getRaw]);
 	
-	NSArray *topics = [viewpoint getUpperTopics];
-	STAssertTrue([topics count] == 1, @"uppertopics number error %@", topics); 
+	NSArray *uppers = [viewpoint getUpperTopics];
+	STAssertTrue([uppers count] == 1, @"uppertopics number error %@", uppers); 
 	
-	topics = [viewpoint getTopics];
+	NSArray *topics = [viewpoint getTopics];
 	STAssertTrue([topics count] == 3, @"getTopics number error %@", topics); 
 	
 	HTTopic *topic4 = [viewpoint createTopic];
 	[topic4 linkTopics:topic1,nil];
 	NSLog(@"Viewpoint: %@", [viewpoint getView]);
 	
+	NSArray *broaders = [topic1 getBroader];
+	NSArray *narrowers = [topic1 getNarrower];
+	STAssertTrue([broaders count] == 1, @"getBroader number error %@", broaders);
+	STAssertTrue([narrowers count] == 2, @"getBroader number error %@", narrowers);
+	
 	//TODO getItems
+	HTCorpus *corpus = [userObj createCorpus:@"corpus"];
+	NSString *itemName = [self getRandomName:@"i.item"];
+	NSString *itemName2 = [self getRandomName:@"i.item2"];
+	HTItem *item = [corpus createItem:itemName];
+	HTItem *item2 = [corpus createItem:itemName2];
+	
+	[item tag:topic3];
+	[item2 tag:topic1];
+	[item tag:topic4];
+	NSArray *items = [topic1 getItems];
+	STAssertTrue([items count] == 2, @"topic getItems number error %i", [items count]);
+	
+	items = [viewpoint getItems];
+	STAssertTrue([items count] == 3, @"viewpoint getItems number error %i", [items count]);
+	
+	[topic3 unlink];
+	narrowers = [topic1 getNarrower];
+	STAssertTrue([narrowers count] == 1, @"getBroader number error %@", narrowers);
+	
+	STAssertTrue([topic1 destroy], @"cannot destroy topic");
+	
+	uppers = [viewpoint getUpperTopics];
+	STAssertTrue([uppers count] == 3, @"uppertopics number error %@", uppers); 
 	
 	NSArray *users = [viewpoint listUsers];
 	STAssertTrue([users count] == 1, @"users number error %@", users); 
 	
 	STAssertTrue([viewpoint rename:@"new_name"], @"cannot rename viewpoint");
 	[viewpoint destroy];
+	[corpus destroy];
 }
 @end

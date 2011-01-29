@@ -162,7 +162,7 @@
 	NSString *docID = [doc objectForKey:@"_id"];
 	NSString *docRev = [doc objectForKey:@"_rev"];
 	NSString *urlString = [NSString stringWithFormat:@"%@/%@?rev=%@", self.serverUrl, docID, docRev];
-	DLog(@"HTTP DELETE Request on URL: %@", urlString);
+	DLog(@"HTTP PUT Request on URL: %@", urlString);
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
@@ -179,6 +179,7 @@
                                                      error:&error];
     
 	DLog(@" URL Status Code %i", [response statusCode]);
+	DLog(@" Request Body %@", doc);
     return (201 == [response statusCode] || 205 == [response statusCode]);
 }
 - (NSDictionary *)httpPost:(NSDictionary *)doc
@@ -200,6 +201,7 @@
 											 error:&error];
     
 	DLog(@" URL Status Code %i", [response statusCode]);
+	DLog(@" Request Body %@", doc);
     if (201 == [response statusCode]) {
 		NSString *json = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
         return	[json JSONValue];

@@ -21,8 +21,11 @@
 	NSArray *upper = [view objectForKey:@"upper"];
 	NSMutableArray *result = [NSMutableArray new];
 	if (upper)
-		for(NSString *topicID in upper)
-			[result addObject:[self getTopic:topicID]];
+		for(NSDictionary *topic in upper)
+		{
+			DLog(@"topic id:%@", topic);
+			[result addObject:[self getTopic:[topic objectForKey:@"id"]]];
+		}
 	return [[result copy] autorelease];
 }
 - (NSArray *)getTopics
@@ -37,9 +40,16 @@
 }
 - (NSArray *)getItems
 {
-	//TODO return HTItem array
-	[self doesNotRecognizeSelector:_cmd];
-	return nil;
+	//[self doesNotRecognizeSelector:_cmd];
+	//return nil;
+	NSMutableArray *result = [NSMutableArray new];
+	NSArray *uppers = [self getUpperTopics];
+	for(HTTopic *topic in uppers)
+	{
+		DLog(@"topic name:%@", [topic getName]);
+		[result addObjectsFromArray: [topic getItems]];
+	}
+	return result;
 }
 - (HTTopic *)getTopic:(NSString *)topicID
 {
