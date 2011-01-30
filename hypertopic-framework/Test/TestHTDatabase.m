@@ -8,6 +8,7 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 #import "HTDatabase.h"
+#import "HTListener.h"
 
 @interface Database : SenTestCase
 {
@@ -63,4 +64,11 @@
 	STAssertTrue([database httpDelete:updatedDoc], nil);
 }
 
+- (void) testCouchDBListener
+{
+	STAssertTrue(!database.listener.finished, nil);
+	while(!database.listener.finished){
+		[[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+	}
+}
 @end

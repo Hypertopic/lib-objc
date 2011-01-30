@@ -40,9 +40,14 @@
 - (NSDictionary *)fetchView
 {
 	NSString *urlString = [self getViewUrl];
-	if(urlString == nil) return nil;
+	if (urlString == nil) return nil;
+	NSDictionary *result = [database getCache:urlString];
+	if (result) return result;
+	
 	NSDictionary *view = [self.database httpGet: urlString];
 	view = [self.database normalize:view];
+	
+	[database setCache:urlString withValue:view];
 	DLog(@"View :%@", view);
 	return view;
 }

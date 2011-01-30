@@ -7,6 +7,7 @@
 //
 
 #import "HTDatabase.h"
+#import "HTListener.h"
 #import "HTUser.h"
 #import "HTCorpus.h"
 #import "HTItem.h"
@@ -17,12 +18,16 @@
 @implementation HTDatabase
 
 @synthesize serverUrl = _serverUrl;
+@synthesize listener;
+@synthesize cache;
 
 - (id) initWithServerUrl:(NSString *)s
 {
 	if(self = [super init])
 	{
 		_serverUrl = [s copy];
+		listener = [[HTListener alloc] initWithServer: self];
+		cache = [NSMutableDictionary new];
 	}
 	return self;
 }
@@ -30,6 +35,8 @@
 - (void)dealloc
 {
     [_serverUrl release];
+	[cache release];
+	[listener release];
     [super dealloc];
 }
 
@@ -43,7 +50,10 @@
 	CFUUIDRef theUUID = CFUUIDCreate(NULL);
 	CFStringRef string = CFUUIDCreateString(NULL, theUUID);
 	CFRelease(theUUID);
-	return [(NSString *)string autorelease];
+	NSMutableString *uuid = (NSMutableString *)string;
+	[uuid stringByReplacingOccurrencesOfString:@"-" withString:@""];
+	[uuid lowercaseString];
+	return [[uuid copy] autorelease];
 }
 + (BOOL)isReserved:(NSString *)key;
 {
@@ -155,7 +165,11 @@
 								returningResponse:&response
 											error:&error];
 	DLog(@"DELETE URL Status Code %i", [response statusCode]);
-	return (200 == [response statusCode]);
+	if (200 == [response statusCode]) {
+		[self purgeCache];
+		return TRUE;
+	} 
+	return FALSE;
 }
 - (BOOL)httpPut:(NSDictionary *)doc
 {
@@ -180,7 +194,12 @@
     
 	DLog(@" URL Status Code %i", [response statusCode]);
 	DLog(@" Request Body %@", doc);
-    return (201 == [response statusCode] || 205 == [response statusCode]);
+    if (201 == [response statusCode] || 205 == [response statusCode])
+	{
+		[self purgeCache];
+		return TRUE;
+	}
+	return FALSE;
 }
 - (NSDictionary *)httpPost:(NSDictionary *)doc
 {
@@ -204,8 +223,42 @@
 	DLog(@" Request Body %@", doc);
     if (201 == [response statusCode]) {
 		NSString *json = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+		[self purgeCache];
         return	[json JSONValue];
 	}
 	return nil;
+}
+#pragma mark -
+#pragma mark Cache management
+- (void)purgeCache
+{
+	@synchronized(self) 
+	{
+		[cache removeAllObjects];
+	}
+}
+- (void)purgeCache:(NSData *)data
+{
+	@synchronized(self) 
+	{
+		[cache removeAllObjects];
+		NSLog(@"purge cache: %@", [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease]);
+	}
+}
+- (void)setCache:(NSString *)key withValue:(NSDictionary *)value
+{
+	@synchronized(self) 
+	{
+		[cache setObject:value forKey:key];
+	}
+}
+- (NSDictionary *)getCache:(NSString *)key
+{
+	NSDictionary *result = nil;
+	@synchronized(self) 
+	{
+		result = [cache objectForKey:key];
+	}
+	return result;
 }
 @end

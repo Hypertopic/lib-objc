@@ -14,15 +14,19 @@
 @class HTItem;
 @class HTViewpoint;
 @class HTTopic;
+@class HTListener;
 
 @interface HTDatabase : NSObject {
-@private
-	NSString* _serverUrl;
+	HTListener *listener;
+	NSMutableDictionary *cache;
+	@private NSString* _serverUrl;
 }
 
-- (id)initWithServerUrl:(NSString *)s;
-
 @property (readonly) NSString *serverUrl;
+@property (retain) HTListener *listener;
+@property (retain) NSMutableDictionary *cache;
+
+- (id)initWithServerUrl:(NSString *)s;
 
 + (NSString *)GetUUID;
 + (BOOL)isReserved:(NSString *)key;
@@ -44,4 +48,9 @@
 - (BOOL)httpPut:(NSDictionary *)doc;
 
 - (NSDictionary *)httpPost:(NSDictionary *)doc;
+
+- (void)purgeCache;
+- (void)purgeCache:(NSData *)data;
+- (void)setCache:(NSString *)key withValue:(NSDictionary *)value;
+- (NSDictionary *)getCache:(NSString *)key;
 @end

@@ -11,8 +11,8 @@
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		E529027412F07CB8007DF4BB /* HTItem.h in Headers */ = {isa = PBXBuildFile; fileRef = E529027212F07CB8007DF4BB /* HTItem.h */; };
 		E529027512F07CB8007DF4BB /* HTItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E529027312F07CB8007DF4BB /* HTItem.m */; };
+		E534130E12F58C0F001010C5 /* TestHypertopic.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A0216512F18E1C00654AC0 /* TestHypertopic.m */; };
 		E535EC7D12EB1A3700875C5B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E535EC7C12EB1A3700875C5B /* LICENSE */; };
-		E53985FC12F1CE7400824D72 /* TestHypertopic.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A0216512F18E1C00654AC0 /* TestHypertopic.m */; };
 		E547FFB312EC0AEC0015E072 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E547FFA012EC0AEC0015E072 /* JSON.h */; };
 		E547FFB412EC0AEC0015E072 /* NSObject+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = E547FFA112EC0AEC0015E072 /* NSObject+JSON.h */; };
 		E547FFB512EC0AEC0015E072 /* NSObject+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = E547FFA212EC0AEC0015E072 /* NSObject+JSON.m */; };
@@ -52,6 +52,8 @@
 		E5D8676012EEDA67001FD018 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D8675F12EEDA67001FD018 /* SenTestingKit.framework */; };
 		E5D8678912EEDB7A001FD018 /* Hypertopic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* Hypertopic.framework */; };
 		E5D867A712EEDC9F001FD018 /* HTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D867A512EEDC9F001FD018 /* HTUser.m */; };
+		E5F1B56712F45142002C366E /* HTListener.h in Headers */ = {isa = PBXBuildFile; fileRef = E5F1B56512F45142002C366E /* HTListener.h */; };
+		E5F1B56812F45142002C366E /* HTListener.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F1B56612F45142002C366E /* HTListener.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +121,8 @@
 		E5D8675A12EEDA23001FD018 /* Test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Test-Info.plist"; sourceTree = "<group>"; };
 		E5D8675F12EEDA67001FD018 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		E5D867A512EEDC9F001FD018 /* HTUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTUser.m; path = Classes/HTUser.m; sourceTree = "<group>"; };
+		E5F1B56512F45142002C366E /* HTListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HTListener.h; path = Classes/HTListener.h; sourceTree = "<group>"; };
+		E5F1B56612F45142002C366E /* HTListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTListener.m; path = Classes/HTListener.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +203,7 @@
 				E529027312F07CB8007DF4BB /* HTItem.m */,
 				E5C16F6E12F10E1C00029630 /* HTViewpoint.m */,
 				E5C16FBA12F12A4400029630 /* HTTopic.m */,
+				E5F1B56612F45142002C366E /* HTListener.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				E529027212F07CB8007DF4BB /* HTItem.h */,
 				E5C2C61A12F00C2A001275C9 /* HTViewpoint.h */,
 				E5C16FB912F12A4400029630 /* HTTopic.h */,
+				E5F1B56512F45142002C366E /* HTListener.h */,
 			);
 			name = headers;
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 				E5C2C68A12F0140A001275C9 /* HTRegistered.h in Headers */,
 				E529027412F07CB8007DF4BB /* HTItem.h in Headers */,
 				E5C16FBB12F12A4400029630 /* HTTopic.h in Headers */,
+				E5F1B56712F45142002C366E /* HTListener.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +463,7 @@
 				E529027512F07CB8007DF4BB /* HTItem.m in Sources */,
 				E5C16F7012F10E1C00029630 /* HTViewpoint.m in Sources */,
 				E5C16FBC12F12A4400029630 /* HTTopic.m in Sources */,
+				E5F1B56812F45142002C366E /* HTListener.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +471,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E53985FC12F1CE7400824D72 /* TestHypertopic.m in Sources */,
+				E534130E12F58C0F001010C5 /* TestHypertopic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
